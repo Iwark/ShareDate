@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t 'app.name' %></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <%# Facebook %>
+  <meta property="og:title" content="<%= t 'app.name' %>">
+  <meta property="og:description" content="<%= t 'app.description' %>">
+  <%# <meta property="og:image" content=""> %>
+  <%# meta property="og:url" content="http://hacker-meetings.com" %>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="<%= t 'app.name' %>">
+
+  <%# link rel="shortcut icon" href="/favicon.ico" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+</head>
+<body>
+  <!-- Header -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+      <div class="navbar-left">
+        <a href="#" class="btn btn-default menu-button">≡</a>
+        <div class="header-icon">
+        </div>
+        <div class="brand">
+          <%= link_to 'Hacker-Meetings',root_path, class:"nav navbar-brand" %>
+        </div>
+      </div>
+      <div class="navbar-right">
+      <%# if user_signed_in? %>
+        <div class="link-new-meeting">
+          <div class="plus-new-meeting">
+            +
+          </div>
+          <div class="text-new-meeting">
+            新規イベント作成
+          </div>
+        </div>
+      <%# else %>
+        <%# link_to "ログイン", user_omniauth_authorize_path(:facebook), class:"btn btn-default join-button" %>
+      <%# end %>
+      </div>
+    </div>
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="white-side"></div>
+      <ul class="sidebar-nav">
+        <% if controller.controller_name == 'meetings' %>
+          <li class="nav-item-active meetings-path">
+        <% else %>
+          <li class="meetings-path">
+        <% end %>
+          <p>Event</p>
+        </li>
+        <li class="making">
+          <p>Calendar</p>
+        </li>
+        <li class="making">
+          <p>Myイベント</p>
+        </li>
+        <li class="making">
+          <p>Member</p>
+        </li>
+        <% if controller.controller_name == 'registrations' %>
+          <li class="nav-item-active users-edit-path">
+        <% else %>
+          <li class="users-edit-path">
+        <% end %>
+          <p>Account</p>
+        </li>
+      </ul>
+    </div>
+    <div class="main">
+      <div class="main_contents">
+        <div class="container">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
